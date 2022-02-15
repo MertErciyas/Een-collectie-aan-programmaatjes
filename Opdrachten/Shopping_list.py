@@ -1,5 +1,3 @@
-import random
-
 shoppingList = {}
 
 def shoppingListMake():

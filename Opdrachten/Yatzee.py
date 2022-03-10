@@ -1,5 +1,21 @@
 from sys import stdout
+import time,os,sys
 from random import randint
+
+def clearScreen(sleepTime):
+    time.sleep(sleepTime)
+    os.system("cls")
+
+def scoreBoard():
+    scoreBoard = {
+        'one: 0',
+        'two: 0',
+        'three: 0',
+        'four: 0',
+        'four: 0',
+        'five: 0',
+        'six: 0'
+        } 
 
 def fancyDice(diceNum=5):
     diceRoll = []
@@ -26,31 +42,47 @@ def rollDice(num):
         diceList.append(randint(1,6))
     return diceList
 
-c = []
+def diceRemover():
+    loseDice = input("do you want to remove a dice? (Yes/No)\n").lower()
+    if loseDice == "yes":
+        removeDice = input("Which dice would you like to remove?\n")
+        try:
+            hand.remove(removeDice)
+        except ValueError:
+            print('Invalid input')
+        diceRemover()
+    else:
+        print("You decided not to remove a dice. These are your dice:")
+        print(hand)
+        clearScreen(5)
+        
+            
+hand = []
+
 def workingDice():
-    global c
+    global hand
     for i in range(3):
-        e =  5 - len(c)
+        e =  5 - len(hand)
         fancyDice(e)
         b = input("Which dice do you choose?\n")
         z = b.replace(' ','').split(',')
         for x in z:
-            c.append(x)
-        print(c)
-        for x in c:
+            hand.append(x)
+        print(hand)
+        diceRemover() #function to remove dice out of your hand
+        for x in hand:
             if not isinstance(x,int):
                 if x.isdigit():
-                    d = c.index(x)
-                    c[d] = int(x)
-    print(c)  
+                    d = hand.index(x)
+                    hand[d] = int(x)
+    print(hand)  
+
 
 
 def main():
     workingDice()
 
+
 main()
 
 
-
-#def scoreBoard():
-#    scoreBoard = {'one: 0','two: 0','three: 0','four: 0','four: 0','five: 0','six: 0'}

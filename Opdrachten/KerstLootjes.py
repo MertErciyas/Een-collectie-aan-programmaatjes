@@ -3,7 +3,6 @@ christmasTickets = []
 def askNames():
     a = True
     while a == True:
-        contains_duplicates = False
         names = input('What name would you like to add? (Type "STOP" if you dont want to add more names)\n').lower()
         if names == 'stop':
             a = False

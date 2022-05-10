@@ -1,17 +1,31 @@
-christmasTickets = []
+import random
 
-def askNames():
-    a = True
-    while a == True:
-        names = input('What name would you like to add? (Type "STOP" if you dont want to add more names)\n').lower()
+kerstLootjesCheck = []
+
+def lootjesMaker():
+    b = True
+    while b == True:
+        names = input("What names would you like to add? (Type STOP if you would like to stop)\n").lower()
         if names == 'stop':
-            a = False
-            print(christmasTickets)
+            if len(kerstLootjesCheck) >= 2:
+                if len(kerstLootjesCheck) % 2 == 0:
+                    b = False
+                    print(f"These are the names right now:\n{kerstLootjesCheck}\n----------------------------------") # everything thats in the list  
+                    kerstLootjeAfmaker()
         else:
-            contains_duplicates = any(christmasTickets.count(element) > 1 for element in christmasTickets)
-            if contains_duplicates == True:
-                del christmasTickets[-1]
+            if names not in kerstLootjesCheck:
+                kerstLootjesCheck.append(names)
+                lootjesMaker()
             else:
-                christmasTickets.append(names)
+                print(end='')
 
-askNames()
+n = 2
+
+def kerstLootjeAfmaker():
+    random.shuffle(kerstLootjesCheck)
+    final = [kerstLootjesCheck[i * n:(i + 1) * n] for i in range((len(kerstLootjesCheck) + n - 1) // n )] 
+    print(*final,sep=", ") # shuffled list print
+    exit()
+
+
+lootjesMaker()
